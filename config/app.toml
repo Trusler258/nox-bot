@@ -1,0 +1,114 @@
+# 幻梦 3.0 全局配置
+# 原则：凡是"可能需要改"的都放这里，不写死在代码里。
+# 优先级：代码内 defaults < 本文件 < 环境变量（V3_*）
+
+[app]
+name = "幻梦"
+version = "3.0.0a0"
+profile = "full"            # full | collector（无头，只跑定时任务）
+timezone = "Asia/Shanghai"
+data_dir = "data"
+log_level = "INFO"          # DEBUG | INFO | WARNING | ERROR
+# 管理员用户 id 列表：owner/admin/group_admin 级命令只认这里
+# （group_admin 目前降级为 admin，因为官方群消息事件不带成员角色）
+admins = []
+
+# ── 运行时 ────────────────────────────────────────────
+[runtime]
+shutdown_timeout_s = 15     # 优雅关闭总超时
+worker_threads = 4          # 阻塞任务线程池（渲染除外）
+handler_timeout_s = 8.0     # 单个事件处理器默认超时
+slow_handler_ms = 2000      # 超过这个耗时打 WARNING
+max_message_bytes = 1048576
+
+# ── 指令 ──────────────────────────────────────────────
+[commands]
+# 允许的前缀，可任意增删；匹配时按长度倒序，避免 "/" 抢走 "/~"
+prefixes = ["/~", "/", ".", "#", "!"]
+strip_leading_space = true  # @ 机器人后残留的空格先剥掉再解析
+case_sensitive = false
+
+# ── 适配器 ────────────────────────────────────────────
+[adapters]
+enabled = ["mock"]          # mock | napcat | qq_official | kook | discord
+inbound_queue_size = 200
+outbound_queue_size = 500
+outbound_rate_per_min = 30
+retry_max = 3
+
+[adapters.mock]
+# mock 适配器无参数，保留段落便于以后扩展
+
+[adapters.napcat]
+ws_url = "ws://127.0.0.1:3001"
+reconnect_initial_ms = 1000
+reconnect_max_ms = 30000
+# token 从 secrets.env 的 NAPCAT_TOKEN 读，不写这里
+
+[adapters.qq_official]
+mode = "websocket"          # websocket | webhook
+sandbox = false
+heartbeat_margin_s = 5      # 心跳提前量
+# 文本以 QQ markdown 为准（msg_type=2）：链接可点、加粗/列表/代码块能渲染。
+#   auto = 先试 markdown，该 scene 没权限就记住并回退纯文本（推荐）
+#   on   = 强制 markdown（没权限时每条都会先失败一次）
+#   off  = 纯文本（msg_type=0）
+markdown = "auto"
+
+# ── 调度 ──────────────────────────────────────────────
+[scheduler]
+tick_s = 1
+lease_seconds = 30          # 任务租约，超时视为进程崩溃
+max_attempts = 3
+retry_backoff_max_s = 60
+job_retention_days = 7
+dead_retention_days = 30
+
+# ── 渲染（M2 用）─────────────────────────────────────
+[render]
+enabled = true
+out_dir = "data/store/cards"
+pool_size = 1
+timeout_ms = 15000
+cache_ttl_s = 600
+cache_max_items = 500
+fallback = "text"           # text | none
+device_scale = 2
+chromium_path = ""          # 空 = 用 PlatformProfile 探测到的系统 Chromium
+
+# ── LLM（M3 用，供应商细节在各插件配置）──────────────
+[llm]
+default_provider = "deepseek"
+request_timeout_s = 60
+max_tool_rounds = 6
+
+# ── Web / 面板（M3 用）───────────────────────────────
+[web]
+enabled = true
+host = "127.0.0.1"
+port = 59310
+# token 为空时只允许 127.0.0.1 访问；对外暴露必须设置
+token = ""
+log_buffer_size = 2000
+
+# ── 可观测 ────────────────────────────────────────────
+[obs]
+log_dir = "logs"
+log_json = true           # 文件日志固定 JSON，供接口与分析使用
+console_format = "text"   # 控制台：text（标准纯文本）| json
+
+# 第三方库在 DEBUG 下会把每帧 keepalive、每次连接复用都打出来，
+# 实测 400 条日志里 392 条是它们。这里统一压到 WARNING。
+quiet_loggers = [
+    "websockets", "websockets.client", "websockets.server",
+    "httpcore", "httpcore.http11", "httpcore.connection",
+    "httpx", "asyncio", "urllib3", "aiohttp", "playwright", "PIL",
+]
+quiet_level = "WARNING"
+log_rotate_days = 14
+trace_sample = 1.0
+
+# ── 插件全局开关（单插件配置在 config/plugins/<id>.toml）──
+[plugins]
+dir = "plugins"
+disabled = []               # 例如 ["echo"]

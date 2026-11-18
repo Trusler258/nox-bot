@@ -1,0 +1,37 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+data/
+logs/
+config/secrets.env
+*.db
+*.db-wal
+*.db-shm
+v2/config/.env
+v2/config/.env.*
+!v2/config/example.env
+
+# ── 不开源的部分（与 V2 仓库同策略：开源只放内核）─────────────────
+plugins/
+v2/
+config/plugins/
+
+# 插件测试随插件一起不开源
+tests/test_chat.py
+tests/test_chat_switch.py
+tests/test_compat.py
+tests/test_llm.py
+tests/test_memory.py
+tests/test_netmusic.py
+tests/test_panel.py
+tests/test_permissions.py
+tests/test_reload.py
+tests/test_rhythm.py
+tests/test_smoke_commands.py
+tests/test_wdsj_collector.py
+tests/test_wdsj_daily.py
+tests/test_wdsj_plugin.py
+scripts/import_v2_history.py
+scripts/wdsj_card_demo.py
