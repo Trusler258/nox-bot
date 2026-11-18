@@ -601,7 +601,7 @@ async def serve() -> int:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(prog="huanmeng")
+    ap = argparse.ArgumentParser(prog="nox")
     ap.add_argument("--demo", action="store_true", help="跑一条假消息后退出")
     ap.add_argument("--profile", default="full", choices=["full", "collector"])
     args = ap.parse_args()

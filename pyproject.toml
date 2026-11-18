@@ -1,7 +1,7 @@
 [project]
-name = "huanmeng"
+name = "nox-bot"
 version = "3.0.0a0"
-description = "幻梦 3.0 微内核"
+description = "Nox 微内核 QQ 机器人"
 license = { text = "AGPL-3.0-or-later" }
 requires-python = ">=3.12"
 dependencies = [

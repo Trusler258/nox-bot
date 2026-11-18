@@ -1,4 +1,4 @@
-# 幻梦 3.0
+# Nox
 
 微内核 + 纯插件的 QQ/KOOK/Discord 机器人。
 
