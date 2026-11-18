@@ -35,3 +35,7 @@ tests/test_wdsj_daily.py
 tests/test_wdsj_plugin.py
 scripts/import_v2_history.py
 scripts/wdsj_card_demo.py
+
+# 文案表与人设属于插件内容，不入开源仓库
+config/lang.toml
+config/prompts/
