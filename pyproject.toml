@@ -1,7 +1,7 @@
 [project]
-name = "nox-bot"
+name = "yume"
 version = "3.0.0a0"
-description = "Nox 微内核 QQ 机器人"
+description = "Yume 微内核 QQ 机器人"
 license = { text = "AGPL-3.0-or-later" }
 requires-python = ">=3.12"
 dependencies = [

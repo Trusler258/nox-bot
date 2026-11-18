@@ -143,7 +143,7 @@ def setup_logging(level: str = "INFO", log_dir: str | Path | None = None,
         fh.setFormatter(JsonFormatter())
         root.addHandler(fh)
 
-    return logging.getLogger("nox")
+    return logging.getLogger("yume")
 
 
 def get_logger(name: str) -> logging.Logger:

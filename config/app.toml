@@ -3,7 +3,7 @@
 # 优先级：代码内 defaults < 本文件 < 环境变量（V3_*）
 
 [app]
-name = "Nox"
+name = "Yume"
 version = "3.0.0a0"
 profile = "full"            # full | collector（无头，只跑定时任务）
 timezone = "Asia/Shanghai"

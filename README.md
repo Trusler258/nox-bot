@@ -1,9 +1,9 @@
-# Nox
+# Yume
 
 [![License: AGPL-3.0-or-later](https://img.shields.io/badge/license-AGPL--3.0--orlater-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
 
-Nox 是一个用 Python 编写的聊天机器人**内核**，采用微内核 + 插件架构：内核负责事件分发、
+Yume 是一个用 Python 编写的聊天机器人**内核**，采用微内核 + 插件架构：内核负责事件分发、
 插件生命周期、存储与调度，业务能力以插件形式挂载。
 
 内核对业务零感知：适配器把平台差异收敛成统一事件，插件通过上下文注册指令与事件处理器，
@@ -38,8 +38,8 @@ Nox 是一个用 Python 编写的聊天机器人**内核**，采用微内核 + �
 ## 安装
 
 ```bash
-git clone https://github.com/Trusler258/nox-bot.git
-cd nox-bot
+git clone https://github.com/Trusler258/yume-bot.git
+cd yume-bot
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -e ".[adapters,web]"
@@ -98,12 +98,12 @@ systemd 单元示例：
 
 ```ini
 [Unit]
-Description=Nox
+Description=Yume
 After=network-online.target
 
 [Service]
-WorkingDirectory=/opt/nox
-ExecStart=/opt/nox/.venv/bin/python -m runtime.main
+WorkingDirectory=/opt/yume
+ExecStart=/opt/yume/.venv/bin/python -m runtime.main
 Restart=always
 RestartSec=5
 

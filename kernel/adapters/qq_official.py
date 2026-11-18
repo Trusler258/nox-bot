@@ -228,7 +228,7 @@ class QQOfficialAdapter:
 
             await ws.send(json.dumps({"op": 2, "d": {
                 "token": f"QQBot {token}", "intents": INTENTS, "shard": [0, 1],
-                "properties": {"$os": "linux", "$browser": "nox",
+                "properties": {"$os": "linux", "$browser": "yume",
                                "$device": "server"}}}))
 
             hb = asyncio.create_task(self._heartbeat(ws, interval))
