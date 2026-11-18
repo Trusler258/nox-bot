@@ -13,12 +13,12 @@ v2/config/.env
 v2/config/.env.*
 !v2/config/example.env
 
-# ── 不开源的部分（与 V2 仓库同策略：开源只放内核）─────────────────
+# 本地开发目录（插件实现与旧版参考副本不随仓库分发）
 plugins/
 v2/
 config/plugins/
 
-# 插件测试随插件一起不开源
+# 插件测试依赖插件实现，不入库
 tests/test_chat.py
 tests/test_chat_switch.py
 tests/test_compat.py
@@ -36,6 +36,6 @@ tests/test_wdsj_plugin.py
 scripts/import_v2_history.py
 scripts/wdsj_card_demo.py
 
-# 文案表与人设属于插件内容，不入开源仓库
+# 文案表与人设属于插件配置，不入库
 config/lang.toml
 config/prompts/
